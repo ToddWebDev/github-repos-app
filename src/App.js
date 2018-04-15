@@ -8,6 +8,10 @@ function NameComponent (props) {
   return <h4>{props.name}</h4>
 }
 
+function HandleComponent (props) {
+  return <h4>{props.handle}</h4>
+}
+
 class App extends Component {
   render() {
     return (
@@ -18,6 +22,7 @@ class App extends Component {
           <a className="btn btn-primary btn-lg" href="" role="button">Learn more</a>
         </div>
         <NameComponent name={name} />
+        <HandleComponent handle={handle} />
       </div>
     );
   }
