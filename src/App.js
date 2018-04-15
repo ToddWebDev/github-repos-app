@@ -23,6 +23,7 @@ class App extends Component {
         </div>
         <NameComponent name={name} />
         <HandleComponent handle={handle} />
+        
       </div>
     );
   }
