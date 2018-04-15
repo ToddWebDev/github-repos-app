@@ -5,12 +5,11 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, caffiene up mate <code>src/App.js</code> and save to reload.
-        </p>
+        <div class="jumbotron">
+          <h1 className="display-4">Hello, from the React World!</h1>
+          <p className="lead">To get started, caffiene up mate <code>src/App.js</code> and save to reload.</p>
+          <a className="btn btn-primary btn-lg" href="" role="button">Learn more</a>
+        </div>
       </div>
     );
   }
