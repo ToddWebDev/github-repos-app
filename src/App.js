@@ -6,7 +6,7 @@ function Nav (props) {
   const languages = ['All','Javascript','Ruby', 'Python'];
   
   return (
-    <div className="btn-group" role="group" aria-label="Basic example">
+    <div className="btn-group" role="group">
       {languages.map((lang) => (
         <button key={lang} type="button" className="btn btn-primary" onClick={() => props.onSelectLanguage(lang)}>{lang}</button>
       ))}
@@ -14,13 +14,17 @@ function Nav (props) {
   )
 }
 
-function ReposList (props) {
+function RepoGrid (props) {
   return (
-    <ul>
+    <ul style={{display: 'flex', flexWrap: 'wrap'}}>
       {props.repos.map(({ name, owner, stargazers_count, html_url }) => (
-        <li key={name}>
-          <span>{name}</span>
-          <a className="btn btn-danger btn-sm" onClick={() => props.onRemoveRepo(name)}>X</a>
+        <li key={name} style={{margin: 30}}>
+          <ul>
+            <li><a href={html_url}>{name}</a></li>
+            <li>@{owner.login}</li>
+            <li>{stargazers_count} stars</li>
+            <a className="btn btn-danger btn-sm" onClick={() => props.onRemoveRepo(name)}>X</a>
+          </ul>
         </li>
       ))}
     </ul>
@@ -137,16 +141,15 @@ class App extends Component {
         <div className="container">
           <div className="row">
             <div className="col-sm">
-              <div className="jumbotron ">
+              <div className="jumbotron text-center">
                 <h1 className="display-4">Hello, from the React World!</h1>
                 <p className="lead">To get started, caffiene up mate <code>src/App.js</code> and save to reload.</p>
                 <HandleComponent handle={this.state.handle} />
-                <a className="btn btn-primary btn-lg" href="" role="button">Learn more</a>
               </div>
             </div>
           </div>
           <div className="row">
-            <div className="col-sm">
+            <div className="col-sm text-center">
               <Nav onSelectLanguage={this.handleSelectLanguage} />
             </div>
           </div>
@@ -159,7 +162,7 @@ class App extends Component {
                   <h1 style={{textAlign: 'center'}}>
                     {this.state.activeLanguage}
                   </h1>
-                  <ReposList repos={this.state.repos} onRemoveRepo={this.handleRemoveRepo} />
+                  <RepoGrid repos={this.state.repos} onRemoveRepo={this.handleRemoveRepo} />
                 </div>}
             </div>
           </div>
