@@ -3,27 +3,29 @@ import './App.css';
 
 //Stateless Functional Components
 function Nav (props) {
+  const languages = ['All','Javascript','Ruby', 'Python'];
+  
   return (
     <div className="btn-group" role="group" aria-label="Basic example">
-      {props.list.map((name) => (
-        <button key={name} type="button" className="btn btn-primary">{name}</button>
+      {languages.map((lang) => (
+        <button key={lang} type="button" className="btn btn-primary" onClick={() => props.onSelectLanguage(lang)}>{lang}</button>
       ))}
     </div>
   )
 }
 
 function ReposList (props) {
-      return (
-        <ul>
-          {props.list.map((repo) => (
-            <li key={repo}>
-              <span>{repo}</span>
-              <a className="btn btn-danger btn-sm" onClick={() => props.onRemoveRepo(repo)}>X</a>
-            </li>
-          ))}
-        </ul>
-      )
-    }
+  return (
+    <ul>
+      {props.repos.map(({ name, owner, stargazers_count, html_url }) => (
+        <li key={name}>
+          <span>{name}</span>
+          <a className="btn btn-danger btn-sm" onClick={() => props.onRemoveRepo(name)}>X</a>
+        </li>
+      ))}
+    </ul>
+  )
+}
 
 function HandleComponent (props) {
   return <p>{props.handle}</p>
@@ -33,11 +35,13 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      nav: ['All','Javascript','Ruby', 'Python'],
-      repos: ['JS','React','Vue', 'Angular'],
-      handle: '@toddwebdev'
+      repos: [],
+      handle: '@toddwebdev',
+      activeLanguage: 'All'
     }
     
+    this.handleSelectLanguage = this.handleSelectLanguage.bind(this)
+    this.fetchRepos = this.fetchRepos.bind(this)
     this.handleRemoveRepo = this.handleRemoveRepo.bind(this)
     
     console.log('--constructor--')
@@ -46,21 +50,55 @@ class App extends Component {
   //Component Lifecycle hooks
   componentDidMount() {
     console.log('--componentDidMount--')
-
+    window.API = {
+      fetchPopularRepos(language = 'all') {
+        const encodedURI = encodeURI(`https://api.github.com/search/repositories?q=stars:>1+language:${language}&sort=stars&order=desc&type=Repositories`)
+        
+        return fetch(encodedURI)
+          .then((data) => data.json())
+          .then((repos) => repos.items)
+          .catch((error) => {
+            console.warn(error)
+            return null
+          });
+      }
+    }
+    this.fetchRepos(this.state.activeLanguage)
   }
-  componentDidUpdate() {
+  componentDidUpdate(prevProps, prevState) {
     console.log('--componentDidUpdate--')
+    if (prevState.activeLanguage !== this.state.activeLanguage) {
+      this.fetchRepos(this.state.activeLanguage)
+    }
   }
   componentWillUnmount() {
     console.log('--componentWillUnmount--')
   }
   
+  fetchRepos(lang) {
+    this.setState({
+      loading: true
+    })
+    window.API.fetchPopularRepos(lang)
+      .then((data) => {
+        this.setState({
+          loading: false,
+          repos: data
+        })
+      })
+  }
+
   //Handlers
   handleRemoveRepo(name) {
     this.setState((currentState) => {
       return {
         repos: currentState.repos.filter((repo) => repo !== name)
       }
+    })
+  }
+  handleSelectLanguage(lang) {
+    this.setState({
+      activeLanguage: lang
     })
   }
   
@@ -80,14 +118,17 @@ class App extends Component {
           </div>
           <div className="row">
             <div className="col-sm">
-              <Nav list={this.state.nav} />
+              <Nav onSelectLanguage={this.handleSelectLanguage} />
             </div>
           </div>
           <hr/>
           <div className="row">
             <div className="col-sm">
+            <h1 style={{textAlign: 'center'}}>
+              {this.state.activeLanguage}
+            </h1>
               <ReposList
-                list={this.state.repos}
+                repos={this.state.repos}
                 onRemoveRepo={this.handleRemoveRepo}
               />
             </div>
