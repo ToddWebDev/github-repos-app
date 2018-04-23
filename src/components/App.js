@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+var Popular = require('./Popular');
 
 //Stateless Functional Components
 function Nav (props) {
@@ -150,6 +151,7 @@ class App extends Component {
           </div>
           <div className="row">
             <div className="col-sm text-center">
+              <Popular />
               <Nav onSelectLanguage={this.handleSelectLanguage} />
             </div>
           </div>
