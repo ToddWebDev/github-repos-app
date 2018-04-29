@@ -6,7 +6,8 @@ class Home extends React.Component {
     return (
       <div className="jumbotron text-center">
         <h1 className="display-4">GitHub Battle</h1>
-        <Link className='btn btn-lg btn-light' to='/battle' >Battle</Link>
+        <br/>
+        <Link className='btn btn-lg btn-primary' to='/battle' >Battle</Link>
       </div>
     )
   }

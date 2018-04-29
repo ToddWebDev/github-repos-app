@@ -120,11 +120,12 @@ class Battle extends React.Component {
     
     return (
       <div>
-        <div className="jumbotron text-center">
-          <h1 className="display-4">GitHub Battle</h1>
-        </div>
+        <h5>GitHub Battle</h5>
+        <br/><br/>
         <div className="row">
           <div className="col-md-6">
+          <div className="card">
+          <div className="card-body">
           {!playerOneName &&
               <PlayerInput 
                 id='playerOne'
@@ -140,9 +141,12 @@ class Battle extends React.Component {
               onReset={this.handleReset}
               id='playerOne'
             />}
-
           </div>
-          <div className="col-md-6">        
+          </div>
+          </div>
+          <div className="col-md-6">
+          <div className="card">
+          <div className="card-body">        
           {!playerTwoName &&
               <PlayerInput 
                 id='playerTwo'
@@ -158,11 +162,12 @@ class Battle extends React.Component {
               onReset={this.handleReset}
               id='playerTwo'
             />}
-            
+          </div>
+          </div>
           </div>
         </div>
         <div className="row">
-          <div className="col-md-6">
+          <div className="col-md">
             {playerOneImage && playerTwoImage &&
               <Link className='btn btn-lg btn-primary' to={{
                   pathname: match.url + '/results',
