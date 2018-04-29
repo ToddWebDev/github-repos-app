@@ -24,15 +24,18 @@ function RepoGrid (props) {
       {props.repos.map(function (repo, index) {
         return (
           <li key={repo.name} className='popular-item'>
-            <div className='popular-rank'>#${index +1}</div>
+            <div className='popular-rank'>#{index +1}</div>
             <ul className='space-list-items'>
               <li>
                 <img 
                   className='avatar'
                   src={repo.owner.avatar_url}
+                  alt={repo.owner.avatar_url}
                 />
               </li>
-              <li>{repo.name}</li>
+              <li><a href={repo.html_url}>{repo.name}</a></li>
+              <li>@{repo.owner.login}</li>
+              <li>{repo.stargazers_count} stars</li>
             </ul>
           </li>
         )
@@ -42,7 +45,7 @@ function RepoGrid (props) {
 }
 
 RepoGrid.propTypes = {
-  // repos: PropTypes.array.isRequired;
+   repos: PropTypes.array.isRequired,
 }
 
 SelectLanguage.propTypes = {

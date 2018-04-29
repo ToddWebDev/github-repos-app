@@ -3,18 +3,6 @@ import './App.css';
 var Popular = require('./Popular');
 
 //Stateless Functional Components
-function Nav (props) {
-  const languages = ['All','Javascript','Ruby', 'Python'];
-  
-  return (
-    <div className="btn-group" role="group">
-      {languages.map((lang) => (
-        <button key={lang} type="button" className="btn btn-primary" onClick={() => props.onSelectLanguage(lang)}>{lang}</button>
-      ))}
-    </div>
-  )
-}
-
 function HandleComponent (props) {
   return <p>{props.handle}</p>
 }
@@ -135,18 +123,6 @@ class App extends Component {
           <div className="row">
             <div className="col-sm text-center">
               <Popular />
-            </div>
-          </div>
-          <hr/>
-          <div className="row">
-            <div className="col-sm">
-            {this.state.loading === true
-              ? <Loading />
-              : <div>
-                  <h1 style={{textAlign: 'center'}}>
-                    {this.state.activeLanguage}
-                  </h1>
-                </div>}
             </div>
           </div>
         </div>
