@@ -8,8 +8,8 @@ function SelectLanguage (props) {
   return (
     <div className="btn-group" role="group">
       {languages.map((lang) => (
-        <button key={lang} type="button" className="btn btn-primary"
-          style={lang === props.selectedLanguage ? {color: 'red'} : null}
+        <button key={lang} type="button" className="btn btn-light btn-md"
+          style={lang === props.selectedLanguage ? {color: '#007bff'} : null}
           onClick={props.onSelect.bind(null, lang)}>
           {lang}
         </button>
@@ -65,9 +65,10 @@ class Loading extends React.Component {
   }
   render() {
     return (
-      <p>
+      <h4 className="display-4">
+        <br/><br/>
         {this.state.text}
-      </p>
+      </h4>
     )
   }
 }

@@ -40,7 +40,7 @@ class App extends Component {
       <Router>
         <div className="container">
           <Nav />
-          <br/><br/>
+          <br/>
           <div className="row">
             <div className="col-sm text-center">
               <Switch>
