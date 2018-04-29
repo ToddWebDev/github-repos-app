@@ -15,23 +15,6 @@ function Nav (props) {
   )
 }
 
-function RepoGrid (props) {
-  return (
-    <ul style={{display: 'flex', flexWrap: 'wrap'}}>
-      {props.repos.map(({ name, owner, stargazers_count, html_url }) => (
-        <li key={name} style={{margin: 30}}>
-          <ul>
-            <li><a href={html_url}>{name}</a></li>
-            <li>@{owner.login}</li>
-            <li>{stargazers_count} stars</li>
-            <a className="btn btn-danger btn-sm" onClick={() => props.onRemoveRepo(name)}>X</a>
-          </ul>
-        </li>
-      ))}
-    </ul>
-  )
-}
-
 function HandleComponent (props) {
   return <p>{props.handle}</p>
 }
@@ -152,7 +135,6 @@ class App extends Component {
           <div className="row">
             <div className="col-sm text-center">
               <Popular />
-              <Nav onSelectLanguage={this.handleSelectLanguage} />
             </div>
           </div>
           <hr/>
@@ -164,7 +146,6 @@ class App extends Component {
                   <h1 style={{textAlign: 'center'}}>
                     {this.state.activeLanguage}
                   </h1>
-                  <RepoGrid repos={this.state.repos} onRemoveRepo={this.handleRemoveRepo} />
                 </div>}
             </div>
           </div>
