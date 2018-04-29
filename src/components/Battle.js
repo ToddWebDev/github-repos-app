@@ -70,6 +70,7 @@ class PlayerInput extends React.Component {
           value={this.state.username}
           onChange={this.handleChange} />
       </div>
+      <br/>
       <button className='btn btn-md btn-primary btn-block' type='submit' disabled={!this.state.username}>Submit</button>
       </form>
     )

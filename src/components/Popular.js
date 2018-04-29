@@ -33,7 +33,7 @@ function RepoGrid (props) {
                   alt={repo.owner.avatar_url}
                 />
               </li>
-              <li><a href={repo.html_url}>{repo.name}</a></li>
+              <li><a href={repo.html_url} target='_blank'>{repo.name}</a></li>
               <li>@{repo.owner.login}</li>
               <li>{repo.stargazers_count} stars</li>
             </ul>
