@@ -1,6 +1,11 @@
-import React, { Component } from 'react';
-import './App.css';
-var Popular = require('./Popular');
+import React, { Component } from 'react'
+import './App.css'
+var Popular = require('./Popular')
+var Nav = require('./Nav')
+var ReactRouter = require('react-router-dom')
+var Router = ReactRouter.BrowserRouter
+var Route = ReactRouter.Route
+
 
 //Stateless Functional Components
 function HandleComponent (props) {
@@ -81,7 +86,7 @@ class App extends Component {
   
   render() {
     return (
-      <div>
+      <Router>
         <div className="container">
           <div className="row">
             <div className="col-sm">
@@ -92,14 +97,15 @@ class App extends Component {
               </div>
             </div>
           </div>
+          <Nav />
+          <br/><br/>
           <div className="row">
             <div className="col-sm text-center">
-              <Popular />
+              <Route path ='/popular' component={Popular} />
             </div>
           </div>
         </div>
-        
-      </div>
+      </Router>
     );
   }
 }
