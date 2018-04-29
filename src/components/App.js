@@ -91,15 +91,6 @@ class App extends Component {
     return (
       <Router>
         <div className="container">
-          <div className="row">
-            <div className="col-sm">
-              <div className="jumbotron text-center">
-                <h1 className="display-4">Hello, from the React World!</h1>
-                <p className="lead">To get started, caffiene up mate <code>src/App.js</code> and save to reload.</p>
-                <HandleComponent handle={this.state.handle} />
-              </div>
-            </div>
-          </div>
           <Nav />
           <br/><br/>
           <div className="row">
