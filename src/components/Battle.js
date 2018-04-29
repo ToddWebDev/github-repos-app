@@ -167,6 +167,7 @@ class Battle extends React.Component {
           </div>
           </div>
         </div>
+        <br/>
         <div className="row">
           <div className="col-md">
             {playerOneImage && playerTwoImage &&
