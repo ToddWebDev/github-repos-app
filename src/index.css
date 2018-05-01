@@ -15,11 +15,6 @@ li {
   list-style-type: none;
 }
 
-.avatar {
-  width: 150px;
-  border-radius: 50%;
-}
-
 .space-list-items {
   margin-bottom: 7px;
 }

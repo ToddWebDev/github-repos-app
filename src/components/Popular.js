@@ -1,6 +1,7 @@
 var React = require('react');
 var PropTypes = require('prop-types')
 var api = require('../utils/api')
+var Loading = require('./Loading')
 
 //Stateless Functional Component
 function SelectLanguage (props) {
@@ -42,35 +43,6 @@ function RepoGrid (props) {
       })}
     </ul>
   )
-}
-
-//Class Components with State and render
-class Loading extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      text: 'Loading'
-    };
-  }
-  componentDidMount() {
-    const stopper = this.state.text + '...';
-    this.interval = window.setInterval(() => {
-      this.state.text === stopper
-        ? this.setState(() => ({ text: 'Loading' }))
-        : this.setState((prevState) => ({ text: prevState.text + '.' }))
-    }, 300)
-  }
-  componentWillUnmount() {
-    window.clearInterval(this.interval);
-  }
-  render() {
-    return (
-      <h4 className="display-4">
-        <br/><br/>
-        {this.state.text}
-      </h4>
-    )
-  }
 }
 
 RepoGrid.propTypes = {
@@ -118,7 +90,7 @@ class Popular extends React.Component {
           selectedLanguage={this.state.selectedLanguage}
           onSelect={this.updateLanguage} />
           {!this.state.repos 
-            ? <Loading />
+            ? <Loading text="Git'ing Things"/>
             : <RepoGrid repos={this.state.repos} />}
       </div>
     )

@@ -5,7 +5,7 @@ function PlayerPreview (props) {
   return (
     <div>
       <div className='text-center'>
-        <img className='img-fluid img-thumbnail rounded'
+        <img className='img-fluid rounded'
           src={props.avatar}
           alt={'Avatar for ' + props.username}
         />

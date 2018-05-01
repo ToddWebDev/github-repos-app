@@ -4,6 +4,7 @@ var queryString = require('query-string')
 var api = require('../utils/api')
 var Link = require('react-router-dom').Link
 var PlayerPreview = require('./PlayerPreview')
+var Loading = require('./Loading')
 
 function Profile (props) {
   var info = props.info
@@ -88,7 +89,7 @@ class Results extends React.Component {
     var loading = this.state.loading
     
     if (loading === true) {
-      return <p>Loading</p>
+      return <Loading text="And the winner is" />
     }
     
     if(error) {
@@ -103,10 +104,18 @@ class Results extends React.Component {
     return (
       <div className='row'>
       <div className='col-md'>
-        <Player label='Winner' score={winner.score} profile={winner.profile} />
+      <div className='card'>
+        <div className='card-body'>
+          <Player label='Winner' score={winner.score} profile={winner.profile} />
+        </div>
+      </div>
       </div>
       <div className='col-md'>
+      <div className='card'>
+      <div className='card-body'>
         <Player label='Loser' score={loser.score} profile={loser.profile} />
+      </div>
+      </div>
       </div>
       </div>
     )
