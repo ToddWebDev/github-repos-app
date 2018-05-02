@@ -29,7 +29,7 @@ function RepoGrid (props) {
             <ul className='space-list-items'>
               <li>
                 <img 
-                  className='avatar'
+                  className='profile rounded'
                   src={repo.owner.avatar_url}
                   alt={repo.owner.avatar_url}
                 />
